@@ -7,7 +7,7 @@ Each skill is a single `SKILL.md` with YAML frontmatter. Claude Code auto-trigge
 ## Install
 
 ```bash
-git clone https://github.com/shaikh-saud705/claude-skills.git
+git clone https://github.com/sssssaud/claude-skills.git
 cp -r claude-skills/*/ ~/.claude/skills/
 ```
 
