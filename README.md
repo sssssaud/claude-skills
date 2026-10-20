@@ -53,6 +53,19 @@ spec-gated-build ──▶ evidence-debug ──▶ ui-screenshot-loop ──▶
 
 Some file paths, account names, and hardware limits in the skill bodies are specific to my machine — fork and edit `SKILL.md` frontmatter/body to fit your own setup.
 
+## Mods
+
+Mods are plugins with a hooks module that change Claude Code itself (status line, slash commands, tool-call guards).
+
+### `skill-tracker`
+Shows the skill Claude just picked in the status line (`🧩 impeccable`) and counts uses across sessions. `/skill-stats` lists them, most used first.
+
+```bash
+cp -r claude-skills/mods/skill-tracker ~/.claude/skills/
+```
+
+Loads from the next session as `skill-tracker@skills-dir`. Turn off with `claude plugin disable skill-tracker@skills-dir`.
+
 ## License
 
 MIT — take what's useful.

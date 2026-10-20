@@ -1,0 +1,6 @@
+{
+  "name": "skill-tracker",
+  "version": "0.1.0",
+  "author": { "name": "Shaikh Saud" },
+  "description": "Shows which skill Claude just picked in the status line and counts uses across sessions (/skill-stats)"
+}
