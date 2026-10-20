@@ -66,6 +66,21 @@ cp -r claude-skills/mods/skill-tracker ~/.claude/skills/
 
 Loads from the next session as `skill-tracker@skills-dir`. Turn off with `claude plugin disable skill-tracker@skills-dir`.
 
+### `rule-guard`
+Turns CLAUDE.md hard rules into blocks that run before every tool call, so they hold even when a long session forgets them. Claude gets `denied: <reason>` instead of running:
+
+- `apt` / `apt-get` (Nobara is Fedora: dnf), and raw `dnf upgrade` (full updates go through `nobara-sync`)
+- `git push --force` / `-f` / `+branch`, `git rebase`, `filter-branch`, `filter-repo`
+- `gh repo delete | rename | archive`, `gh repo edit --visibility`, `gh api -X DELETE`
+- anything touching `mission-control/credentials`
+- writes inside the `drishti` / `drishti-urban-intelligence` team repos (reads still work)
+
+When a rule is broken on purpose, the person runs that one command in their own terminal. Edit `hooks/rules.ts` to fit your own rules.
+
+```bash
+cp -r claude-skills/mods/rule-guard ~/.claude/skills/
+```
+
 ## License
 
 MIT — take what's useful.

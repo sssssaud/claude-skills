@@ -1,0 +1,6 @@
+{
+  "name": "rule-guard",
+  "version": "0.1.0",
+  "description": "Enforces Saud's CLAUDE.md hard rules before a tool runs: no apt, no force-push or history rewrite, no repo delete/rename/visibility change, credentials stay unread, drishti repos read-only",
+  "author": { "name": "Shaikh Saud" }
+}
