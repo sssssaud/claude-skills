@@ -1,149 +1,30 @@
-# Skills audit — 2026-10-20 (v2: every description read)
+# Skills audit — v3, 2026-10-20: fewer, but the best
 
-467 skills (408 loose + 59 in plugins). Only 13 have ever been used. The 25 skills synced from your claude.ai account are not counted (Anthropic manages them).
+Why fewer: Claude Code shows full skill descriptions only up to 1% of the context window (`skillListingBudgetFraction` 0.01 → ~8,000 chars on a 200k model). Past that, skills appear as a bare name and Claude can't tell when to use them. Your debug log on 2026-09-13: *78 skills, 28,450 chars > 6,000 budget*.
 
-Claude Code has 4 modes per skill (`skillOverrides` in `~/.claude/settings.json`):
+Applied 2026-10-20: `skillListingBudgetFraction` 0.01 → 0.03. Measured in a real session: 168 skills, 73,497 chars (~18k tokens), every description shown in full, no over-budget warning. Before: 244 skills wanted 106,670 chars, 30,000 shown.
 
-| Mode | What it means | Count |
+**127 skills on** (Claude picks them by itself; 16 Remotion/suite members listed by name only), **343 off** (hidden, not deleted — remove the line from `skillOverrides` to bring one back).
+
+Plugins (superpowers, ponytail, kicad-happy, universal-modder, founder-skill, instagram-agent, brag) are on as whole units: `skillOverrides` can't switch single plugin skills. Your own skills, git-finder and project-kickoff are never touched.
+
+Backup: `~/.claude/settings.json.bak-2026-10-20-before-skill-curation`.
+
+| Job | On | Skills |
 |---|---|---|
-| on | Claude sees the description and uses it automatically | **82** |
-| user-invocable-only | hidden from Claude, you type `/name` to use it — zero tokens | **227** |
-| off | gone from both | **158** |
+| Core workflow | 21 | spec-gated-build, evidence-debug, ship-clean, claude-context-pdf, skill-security-auditor, skill-tester, using-superpowers, brainstorming, systematic-debugging, writing-plans, executing-plans, verification-before-completion, test-driven-development, requesting-code-review, receiving-code-review, finishing-a-development-branch, writing-skills, ponytail, ponytail-review, ponytail-audit, ponytail-debt |
+| Website / UI | 11 | impeccable, design-taste-frontend, emil-design-eng, ai-design-skills-cheat-sheet, ui-screenshot-loop, a11y-audit, break-ui, design-md-reference, senior-fullstack, vercel-react-best-practices, deploy-to-vercel |
+| 2D animation / video | 16 | animate, review-animations, animation-performance, remotion-best-practices, remotion-captions, remotion-create, remotion-docs, remotion-interactivity, remotion-maps, remotion-markup, remotion-multimedia, remotion-render, remotion-saas, remotion-studio, remotion-upgrade, brag |
+| 3D model | 1 | parametric-3d-printing |
+| Circuits | 11 | kicad, spice, emc, bom, datasheets, jlcpcb, lcsc, digikey, mouser, element14, pcbway |
+| AI model | 11 | ml-vram-budget, senior-ml-engineer, senior-computer-vision, senior-data-scientist, rag-architect, mcp-server-builder, agent-workflow-designer, senior-prompt-engineer, llm-cost-optimizer, data-quality-auditor, autoresearch-agent |
+| App (mobile) | 3 | vercel-react-native-skills, animate-expo, mobile-native |
+| Software | 11 | playwright-cli, docker-development, ci-cd-pipeline-builder, database-designer, dependency-auditor, performance-profiler, tech-stack-evaluator, senior-architect, senior-security, ship-gate, saas-scaffolder |
+| Game modding | 11 | mod-any-game, game-recon, reverse-engineering, asset-pipeline, fal-assets, game-automation, game-research-websearch, mashup-mods, publish-mod, share-field-notes, showcase-video |
+| Business (sell what you build) | 31 | founder-board, founder-competitors, founder-consumer, founder-pricing, founder-offer, founder-cfo, founder-marketing, founder-brand, founder-ops, founder-launch, founder-plan, copywriting, seo-audit, page-cro, stripe-integration-expert, contract-and-proposal-writer, app-store-optimization, analytics-tracking, ig-reel, ig-caption, ig-carousel, ig-story, ig-plan, ig-viral, ig-human, ig-profile, ig-audit, ig-comment, ig-reply, ig-dm, ig-repurpose |
 
-Description tokens every session: ~18,562 now → ~7,949 after. Nothing is moved or deleted.
+3D animation has no skill: it runs through the Blender MCP server.
 
-## By domain
+## Off
 
-| Domain | on | /name | off |
-|---|---|---|---|
-| Core workflow | 26 |  |  |
-| Website / UI | 8 | 27 |  |
-| 2D animation / video | 5 | 20 |  |
-| 3D model | 1 |  |  |
-| Circuits | 11 |  |  |
-| AI model | 6 | 15 |  |
-| App (mobile) |  | 6 |  |
-| Software | 1 | 50 |  |
-| Game modding | 11 |  |  |
-| Research / study |  | 9 |  |
-| Thinking / process |  | 20 |  |
-| Business: idea + market |  | 13 |  |
-| Business: pricing + money |  | 11 |  |
-| Business: launch + marketing |  | 34 |  |
-| Business: social + video | 13 | 10 |  |
-| Business: founder + legal |  | 12 |  |
-| Medical-device regulation |  |  | 17 |
-| Enterprise compliance audits |  |  | 11 |
-| Big-company management |  |  | 65 |
-| Enterprise tools you don't use |  |  | 24 |
-| Bundle index pages (the real skills are listed separately) |  |  | 11 |
-| Demo / junk |  |  | 9 |
-| Duplicate |  |  | 16 |
-| Clashes with a built-in command |  |  | 5 |
-
-Gap: no skill for **3D animation**. That runs through the Blender MCP server (already connected), not a skill.
-
-## Core workflow
-
-- **on:** claude-context-pdf, evidence-debug, ponytail:ponytail, ponytail:ponytail-audit, ponytail:ponytail-debt, ponytail:ponytail-gain, ponytail:ponytail-help, ponytail:ponytail-review, ship-clean (5x), skill-security-auditor, spec-gated-build, superpowers:brainstorming (7x), superpowers:diagnosing-superpowers, superpowers:dispatching-parallel-agents, superpowers:executing-plans, superpowers:finishing-a-development-branch, superpowers:receiving-code-review, superpowers:requesting-code-review, superpowers:subagent-driven-development, superpowers:systematic-debugging (1x), superpowers:test-driven-development, superpowers:using-git-worktrees, superpowers:using-superpowers, superpowers:verification-before-completion, superpowers:writing-plans, superpowers:writing-skills
-
-## Website / UI
-
-- **on:** a11y-audit, ai-design-skills-cheat-sheet (2x), break-ui, design-taste-frontend (3x), emil-design-eng (2x), frontend-design:frontend-design, impeccable (2x), ui-screenshot-loop (3x)
-- **/name:** deploy-to-vercel, design-md-reference, epic-design, full-page-screenshot, gpt-taste, high-end-visual-design, image-to-code, imagegen-frontend-web, industrial-brutalist-ui, landing, landing-page-generator, minimalist-ui, schema-markup, senior-backend, senior-frontend, senior-fullstack, site-architecture, stitch-design-taste, ui-design-system, ux-product-auditor, ux-researcher-designer, vercel-cli-with-tokens, vercel-composition-patterns, vercel-optimize, vercel-react-best-practices, vercel-react-view-transitions, web-design-guidelines
-
-## 2D animation / video
-
-- **on:** animate, brag:brag, brag:brag-slim, remotion-best-practices, review-animations
-- **/name:** animation-performance, animation-vocabulary, apple-design, ask-sonner, demo-video, find-animation-opportunities, improve-animations, pick-ui-library, prototype, remotion-captions, remotion-create, remotion-docs, remotion-interactivity, remotion-maps, remotion-markup, remotion-multimedia, remotion-render, remotion-saas, remotion-studio, remotion-upgrade
-
-## 3D model
-
-- **on:** parametric-3d-printing
-
-## Circuits
-
-- **on:** kicad-happy:bom, kicad-happy:datasheets, kicad-happy:digikey, kicad-happy:element14, kicad-happy:emc, kicad-happy:jlcpcb, kicad-happy:kicad, kicad-happy:lcsc, kicad-happy:mouser, kicad-happy:pcbway, kicad-happy:spice
-
-## AI model
-
-- **on:** mcp-server-builder, ml-vram-budget, rag-architect, senior-computer-vision, senior-data-scientist, senior-ml-engineer
-- **/name:** agent-designer, agent-workflow-designer, ai-security, ai-workflow-architect, autoresearch-agent, data-quality-auditor, llm-cost-optimizer, prompt-engineer-toolkit, prompt-governance, prompt-optimizer, senior-data-engineer, senior-prompt-engineer, setup, statistical-analyst, workflow-builder
-
-## App (mobile)
-
-- **/name:** animate-expo, apple-hig-expert, imagegen-frontend-mobile, mobile-native, vercel-react-native-skills, write-swift
-
-## Software
-
-- **on:** playwright-cli
-- **/name:** adversarial-reviewer, agent-browser, api-design-reviewer, api-test-suite-builder, aws-solution-architect, azure-cloud-architect, browser-automation, changelog-generator, ci-cd-pipeline-builder, cloud-security, code-reviewer, code-to-prd, code-tour, codebase-onboarding, coverage, database-designer, database-schema-designer, dependency-auditor, docker-development, email-template-builder, env-secrets-manager, feature-flags-architect, fix, gcp-cloud-architect, generate, git-worktree-manager, migrate, migration-architect, monorepo-navigator, observability-designer, performance-profiler, pr-review-expert, pw, red-team, release-manager, report, saas-scaffolder, secrets-vault-manager, security-guidance, security-pen-testing, senior-architect, senior-devops, senior-qa, senior-security, ship-gate, spec-to-repo, sql-database-assistant, tech-debt-tracker, tech-stack-evaluator, terraform-patterns
-- _Playwright test pack; /pw is the entry_
-
-## Game modding
-
-- **on:** universal-modder:asset-pipeline, universal-modder:fal-assets, universal-modder:game-automation, universal-modder:game-recon, universal-modder:game-research-websearch, universal-modder:mashup-mods, universal-modder:mod-any-game (1x), universal-modder:publish-mod, universal-modder:reverse-engineering, universal-modder:share-field-notes, universal-modder:showcase-video
-
-## Research / study
-
-- **/name:** ai-research-analyst, dossier, litreview, notebooklm, patent, pulse, research, research-summarizer, syllabus
-
-## Thinking / process
-
-- **/name:** behuman, capture, caveman, challenge, extract, focused-fix, grill-me, grill-with-docs, handoff, karpathy-coder, llm-wiki, presentation-structure (1x), presentation-styling, reflect, self-eval, skill-finder, skill-tester (1x), tdd-guide, write-a-skill, writing-guidelines
-
-## Business: idea + market
-
-- **/name:** andreessen, competitive-intel, competitive-teardown, competitor-alternatives, hard-call, market-research, office-hours, product-discovery, product-manager-toolkit, product-research, product-strategist, saas-idea-validator, stress-test
-
-## Business: pricing + money
-
-- **/name:** business-investment-advisor, cfo-advisor, churn-prevention, customer-success-manager, financial-analyst, paywall-upgrade-cro, pricing-strategist, pricing-strategy, referral-program, saas-metrics-coach, stripe-integration-expert
-
-## Business: launch + marketing
-
-- **/name:** ab-test-setup, ad-creative, aeo, ai-seo, analytics-tracking, app-store-optimization, brand-guidelines, brandkit, campaign-analytics, chief-content-officer, content-humanizer, content-production, content-strategy, copy-editing, copywriting, experiment-designer, form-cro, free-tool-strategy, landing-page-cro-expert, launch-strategy, marketing-campaign-planner, marketing-context, marketing-demand-acquisition, marketing-ideas, marketing-psychology, marketing-strategy-pmm, onboarding-cro, page-cro, paid-ads, popup-cro, product-analytics, programmatic-seo, seo-audit, signup-flow-cro
-
-## Business: social + video
-
-- **on:** instagram-agent:ig-audit, instagram-agent:ig-caption, instagram-agent:ig-carousel, instagram-agent:ig-comment, instagram-agent:ig-dm, instagram-agent:ig-human, instagram-agent:ig-plan, instagram-agent:ig-profile, instagram-agent:ig-reel, instagram-agent:ig-reply, instagram-agent:ig-repurpose, instagram-agent:ig-story, instagram-agent:ig-viral
-- **/name:** cold-email, email-sequence, newsletter-writer, personal-brand-godin, social-content, social-media-analyzer, social-media-manager, video-content-strategist, x-twitter-growth, youtube-producer
-
-## Business: founder + legal
-
-- **/name:** business-growth-consultant, ceo-advisor, cmo-advisor, contract-and-proposal-writer, cpo-advisor, cto-advisor, executive-mentor, founder-ceo-coach, founder-coach, gdpr-dsgvo-expert, general-counsel-advisor, intl-expansion
-
-## Medical-device regulation
-
-- **off:** capa-officer, clinical-research, fda-consultant-specialist, fda-qsr-audit-prep, grants, information-security-manager-iso27001, iso13485-audit-prep, mdr-745-specialist, qms-audit-expert, quality-documentation-manager, quality-manager-qmr, quality-manager-qms-iso13485, ra-qm-skills, regulatory-affairs-head, research-finance, research-ops-skills, risk-management-specialist
-
-## Enterprise compliance audits
-
-- **off:** ai-act-readiness, aims-audit, compliance-os, compliance-readiness, eu-ai-act-specialist, gdpr-audit-prep, isms-audit-expert, iso27001-audit-prep, iso42001-specialist, soc2-audit-prep, soc2-compliance
-
-## Big-company management
-
-- **off:** agent-protocol, board, board-deck-builder, board-meeting, board-prep, boardroom, brief, c-level-agents, caio-review, capacity-planner, cco-review, cdo-review, cfo-review, change-management, channel-economics, chief-ai-officer-advisor, chief-customer-officer-advisor, chief-data-officer-advisor, chief-of-staff, chro-advisor, ciso-advisor, ciso-review, cmo-review, commercial-forecaster, commercial-policy, company-os, context-engine, coo-advisor, cpo-review, cro-advisor, cro-review, cross-eval, cs-onboard, cto-review, culture-architect, deal-desk, decide, decision-logger, execute, founder-mode, freeze, gc-review, internal-comms, internal-narrative, interview-system-designer, knowledge-ops, ma-playbook, meeting-analyzer, onboard, org-health-diagnostic, partnerships-architect, post-mortem, postmortem, process-mapper, procurement-optimizer, revenue-operations, rfp-responder, roadmap-communicator, sales-engineer, scenario-war-room, strategic-alignment, team-communications, vendor-management, vpe-advisor, vpe-review
-
-## Enterprise tools you don't use
-
-- **off:** agile-product-owner, atlassian-admin, atlassian-templates, browserstack, chaos-engineering, confluence-expert, google-workspace-cli, helm-chart-builder, inbox-setup, inbox-triage, incident-commander, incident-response, jira-expert, kubernetes-operator, ms365-tenant-manager, runbook-generator, scrum-master, senior-pm, senior-secops, slo-architect, snowflake-development, tc-tracker, testrail, threat-detection
-
-## Bundle index pages (the real skills are listed separately)
-
-- **off:** business-growth-skills, business-operations-skills, c-level-skills, commercial-skills, engineering-advanced-skills, engineering-skills, finance-skills, marketing-ops, marketing-skills, pm-skills, product-skills
-
-## Demo / junk
-
-- **off:** agenthub, eval, merge, run, spawn, time-skill, vibe-to-agentic-framework, weather-fetcher, weather-svg-creator
-
-## Duplicate
-
-- **off:** claude-coach, command-guide, content-creator, design-taste-frontend-v1, full-output-enforcement, ponytail, ponytail-audit, ponytail-debt, ponytail-gain, ponytail-help, ponytail-review, promote, redesign-existing-projects, remember, self-improving-agent, spec-driven-workflow
-- _covered by a kept skill or Claude Code itself_
-- _exact copy of the ponytail plugin_
-
-## Clashes with a built-in command
-
-- **off:** init, loop, resume (7x), review, status (5x)
-- _/resume /loop /init /review /status_
+ab-test-setup, ad-creative, adversarial-reviewer, aeo, agent-browser, agent-designer, agent-protocol, agenthub, agile-product-owner, ai-act-readiness, ai-research-analyst, ai-security, ai-seo, ai-workflow-architect, aims-audit, analytics-tracking, andreessen, animation-vocabulary, api-design-reviewer, api-test-suite-builder, app-store-optimization, apple-design, apple-hig-expert, ask-sonner, atlassian-admin, atlassian-templates, autoresearch-agent, aws-solution-architect, azure-cloud-architect, behuman, board, board-deck-builder, board-meeting, board-prep, boardroom, brand-guidelines, brandkit, brief, browser-automation, browserstack, business-growth-consultant, business-growth-skills, business-investment-advisor, business-operations-skills, c-level-agents, c-level-skills, caio-review, campaign-analytics, capa-officer, capacity-planner, capture, caveman, cco-review, cdo-review, ceo-advisor, cfo-advisor, cfo-review, challenge, change-management, changelog-generator, channel-economics, chaos-engineering, chief-ai-officer-advisor, chief-content-officer, chief-customer-officer-advisor, chief-data-officer-advisor, chief-of-staff, chro-advisor, churn-prevention, ciso-advisor, ciso-review, claude-coach, clinical-research, cloud-security, cmo-advisor, cmo-review, code-reviewer, code-to-prd, code-tour, codebase-onboarding, cold-email, command-guide, commercial-forecaster, commercial-policy, commercial-skills, company-os, competitive-intel, competitive-teardown, competitor-alternatives, compliance-os, compliance-readiness, confluence-expert, content-creator, content-humanizer, content-production, content-strategy, context-engine, coo-advisor, copy-editing, coverage, cpo-advisor, cpo-review, cro-advisor, cro-review, cross-eval, cs-onboard, cto-advisor, cto-review, culture-architect, customer-success-manager, database-schema-designer, deal-desk, decide, decision-logger, demo-video, deploy-to-vercel, design-taste-frontend-v1, dossier, email-sequence, email-template-builder, engineering-advanced-skills, engineering-skills, env-secrets-manager, epic-design, eu-ai-act-specialist, eval, execute, executive-mentor, experiment-designer, extract, fda-consultant-specialist, fda-qsr-audit-prep, feature-flags-architect, finance-skills, financial-analyst, find-animation-opportunities, fix, focused-fix, form-cro, founder-ceo-coach, founder-coach, founder-mode, free-tool-strategy, freeze, full-output-enforcement, full-page-screenshot, gc-review, gcp-cloud-architect, gdpr-audit-prep, gdpr-dsgvo-expert, general-counsel-advisor, generate, git-worktree-manager, google-workspace-cli, gpt-taste, grants, grill-me, grill-with-docs, handoff, hard-call, helm-chart-builder, high-end-visual-design, image-to-code, imagegen-frontend-mobile, imagegen-frontend-web, improve-animations, inbox-setup, inbox-triage, incident-commander, incident-response, industrial-brutalist-ui, information-security-manager-iso27001, init, internal-comms, internal-narrative, interview-system-designer, intl-expansion, isms-audit-expert, iso13485-audit-prep, iso27001-audit-prep, iso42001-specialist, jira-expert, karpathy-coder, knowledge-ops, kubernetes-operator, landing, landing-page-cro-expert, landing-page-generator, launch-strategy, litreview, llm-wiki, loop, ma-playbook, market-research, marketing-campaign-planner, marketing-context, marketing-demand-acquisition, marketing-ideas, marketing-ops, marketing-psychology, marketing-skills, marketing-strategy-pmm, mdr-745-specialist, meeting-analyzer, merge, migrate, migration-architect, minimalist-ui, monorepo-navigator, ms365-tenant-manager, newsletter-writer, notebooklm, observability-designer, office-hours, onboard, onboarding-cro, org-health-diagnostic, paid-ads, partnerships-architect, patent, paywall-upgrade-cro, personal-brand-godin, pick-ui-library, pm-skills, ponytail, ponytail-audit, ponytail-debt, ponytail-gain, ponytail-help, ponytail-review, popup-cro, post-mortem, postmortem, pr-review-expert, presentation-structure, presentation-styling, pricing-strategist, pricing-strategy, process-mapper, procurement-optimizer, product-analytics, product-discovery, product-manager-toolkit, product-research, product-skills, product-strategist, programmatic-seo, promote, prompt-engineer-toolkit, prompt-governance, prompt-optimizer, prototype, pulse, pw, qms-audit-expert, quality-documentation-manager, quality-manager-qmr, quality-manager-qms-iso13485, ra-qm-skills, red-team, redesign-existing-projects, referral-program, reflect, regulatory-affairs-head, release-manager, remember, remotion-captions, remotion-create, remotion-docs, remotion-interactivity, remotion-maps, remotion-markup, remotion-multimedia, remotion-render, remotion-saas, remotion-studio, remotion-upgrade, report, research, research-finance, research-ops-skills, research-summarizer, resume, revenue-operations, review, rfp-responder, risk-management-specialist, roadmap-communicator, run, runbook-generator, saas-idea-validator, saas-metrics-coach, sales-engineer, scenario-war-room, schema-markup, scrum-master, secrets-vault-manager, security-guidance, security-pen-testing, self-eval, self-improving-agent, senior-backend, senior-data-engineer, senior-devops, senior-frontend, senior-pm, senior-qa, senior-secops, setup, signup-flow-cro, site-architecture, skill-finder, skill-tester, slo-architect, snowflake-development, soc2-audit-prep, soc2-compliance, social-content, social-media-analyzer, social-media-manager, spawn, spec-driven-workflow, spec-to-repo, sql-database-assistant, statistical-analyst, status, stitch-design-taste, strategic-alignment, stress-test, syllabus, tc-tracker, tdd-guide, team-communications, tech-debt-tracker, terraform-patterns, testrail, threat-detection, time-skill, ui-design-system, ux-product-auditor, ux-researcher-designer, vendor-management, vercel-cli-with-tokens, vercel-composition-patterns, vercel-optimize, vercel-react-view-transitions, vibe-to-agentic-framework, video-content-strategist, vpe-advisor, vpe-review, weather-fetcher, weather-svg-creator, web-design-guidelines, workflow-builder, write-a-skill, write-swift, writing-guidelines, x-twitter-growth, youtube-producer
