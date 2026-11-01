@@ -6,7 +6,7 @@ Applied 2026-10-20: `skillListingBudgetFraction` 0.01 → 0.03. Measured in a re
 
 **127 skills on** (Claude picks them by itself; 16 Remotion/suite members listed by name only), **343 off** (hidden, not deleted — remove the line from `skillOverrides` to bring one back).
 
-Plugins (superpowers, ponytail, kicad-happy, universal-modder, founder-skill, instagram-agent, brag) are on as whole units: `skillOverrides` can't switch single plugin skills. Your own skills, git-finder and project-kickoff are never touched.
+Plugins (superpowers, ponytail, kicad-happy, universal-modder, founder-skill, instagram-agent, brag, day-trader-skill) are on as whole units: `skillOverrides` can't switch single plugin skills. Your own skills, git-finder and project-kickoff are never touched.
 
 Backup: `~/.claude/settings.json.bak-2026-10-20-before-skill-curation`.
 
@@ -22,8 +22,11 @@ Backup: `~/.claude/settings.json.bak-2026-10-20-before-skill-curation`.
 | Software | 11 | playwright-cli, docker-development, ci-cd-pipeline-builder, database-designer, dependency-auditor, performance-profiler, tech-stack-evaluator, senior-architect, senior-security, ship-gate, saas-scaffolder |
 | Game modding | 11 | mod-any-game, game-recon, reverse-engineering, asset-pipeline, fal-assets, game-automation, game-research-websearch, mashup-mods, publish-mod, share-field-notes, showcase-video |
 | Business (sell what you build) | 31 | founder-board, founder-competitors, founder-consumer, founder-pricing, founder-offer, founder-cfo, founder-marketing, founder-brand, founder-ops, founder-launch, founder-plan, copywriting, seo-audit, page-cro, stripe-integration-expert, contract-and-proposal-writer, app-store-optimization, analytics-tracking, ig-reel, ig-caption, ig-carousel, ig-story, ig-plan, ig-viral, ig-human, ig-profile, ig-audit, ig-comment, ig-reply, ig-dm, ig-repurpose |
+| Day trading (added 2026-11-01) | 11 | trader-scanner, trader-news, trader-analyst, trader-pelosi, trader-entry, trader-exit, trader-budget, trader-risk, trader-broker, trader-alerts, trader-timemachine |
 
 3D animation has no skill: it runs through the Blender MCP server.
+
+Job hunting has no global skill: `ai-job-search` (added 2026-11-01) is a whole workspace, cloned to `~/Desktop/Projects/ai-job-search/`. Its skills and commands (`/setup`, `/scrape`, `/rank`, `/apply`, `/interview`, `/outcome`) only load when Claude is opened in that folder.
 
 ## Off
 
