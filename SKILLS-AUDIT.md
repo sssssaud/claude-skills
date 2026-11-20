@@ -24,6 +24,7 @@ Backup: `~/.claude/settings.json.bak-2026-10-20-before-skill-curation`.
 | Business (sell what you build) | 31 | founder-board, founder-competitors, founder-consumer, founder-pricing, founder-offer, founder-cfo, founder-marketing, founder-brand, founder-ops, founder-launch, founder-plan, copywriting, seo-audit, page-cro, stripe-integration-expert, contract-and-proposal-writer, app-store-optimization, analytics-tracking, ig-reel, ig-caption, ig-carousel, ig-story, ig-plan, ig-viral, ig-human, ig-profile, ig-audit, ig-comment, ig-reply, ig-dm, ig-repurpose |
 | Day trading (added 2026-11-01) | 11 | trader-scanner, trader-news, trader-analyst, trader-pelosi, trader-entry, trader-exit, trader-budget, trader-risk, trader-broker, trader-alerts, trader-timemachine |
 | Reverse engineering (added 2026-11-17) | 1 | reverse-engineer-anything (REA plugin: MCP server with 255 tools; Node 24 LTS user-local; native binaries need Ghidra/IDA/Hopper, none installed yet) |
+| Sound for videos (added 2026-11-20) | 3 | real-sfx (your own sound library + uisfx UI cues), real-sound (licensed recordings from Freesound/Mixkit, full mix/master/credits process), earshot (lets Claude hear audio; MCP server with 16 tools, CPU models) |
 
 3D animation has no skill: it runs through the Blender MCP server.
 
